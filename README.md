@@ -1,2 +1,2 @@
 # WebFormWithAnalytics
-WebForm powered by puthon + Django
+WebForm powered by python + Django
