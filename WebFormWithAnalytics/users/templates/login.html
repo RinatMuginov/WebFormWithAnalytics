@@ -1,0 +1,36 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'register_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Finance Manager by RL</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class = "MainBlock">
+        <h1>Finance Manager by RL</h1>
+        <form action="{% url 'login' %}" method="POST" autocomplete="off" novalidate>
+            {% csrf_token %}
+            <input type="text" name="user_login" placeholder="Login" minlength="1" autocomplete="new-username">
+            <input type="password" name="user_password" placeholder="Password" minlength="1" autocomplete="new-password">
+            {% if messages %}
+            <div class="Error">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class = "ButtonBlock">
+                <button type="submit" name="action" value="login" formaction="{% url 'login' %}">Login</button>
+                <a href="{% url 'register' %}">
+                    <button type="button">Register</button>
+                </a>
+            </div>
+        </form> 
+    </div>
+</body>
+</html>
