@@ -11,7 +11,15 @@ h2{
     font-size: 48px;
     font-weight: 500;
     text-align: center;
-    margin-top: 0px;
+    margin-top: 10px;
+}
+
+h3{
+    font-family: Oswald;
+    font-size: 32px;
+    font-weight: 500;
+    text-align: center;
+    margin-top: 10px;
 }
 
 p{
@@ -23,6 +31,25 @@ p{
 }
 
 /*structure*/
+
+.PageDivider{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;  
+    align-items: center;      
+}
+
+.MainDivide{
+    /*border: dashed red;*/
+    min-width: 82vw;
+    min-height: 100vh;
+}
+
+.MenuDivide{
+    justify-content: left;  
+    min-width: 15vw;
+    min-height: 100vh;
+}
 
 .MainBlock{
     display: flex;
@@ -39,6 +66,13 @@ p{
     align-items: center;      
     gap: 80px;
     margin-top: 10px;
+}
+
+.MiniApps{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;  
+    gap: 100px;
 }
 
 /*form*/
@@ -62,6 +96,17 @@ input{
     text-align: left;
 }
 
+option, select{
+    height: 30px;
+    width:100%;
+    min-width: 240px;
+    max-width: 300px;
+    font-family: Montserrat;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: left;
+}
+
 button{
     height: 30px;
     width: 100px;
@@ -69,4 +114,80 @@ button{
     font-size: 18px;
     font-weight: 500;
     text-align: center;
+}
+
+/*navigation*/
+
+.MenuDivide {
+    background: #2c3e50;
+    opacity: 0.75;
+}
+
+.menu ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu a {
+    display: block;
+    padding: 15px 20px;
+    color: white; 
+    text-decoration: none; 
+    font-family: Montserrat;
+    transition: background 0.3s ease;
+}
+
+.menu a:hover {
+    background: #34495e;
+}
+
+.ProfileIcon p{
+    color: white; 
+    text-decoration: none; 
+    font-family: Montserrat;
+    font-weight: 800;
+}
+
+.ProfileIcon form{
+    justify-content: left; 
+    align-items: right;     
+    display: flex;
+}
+
+.ProfileIcon button{
+    border: dashed red;
+    color: white; 
+    text-decoration: none; 
+    font-family: Montserrat;
+    background: 0;
+    border: none;
+}
+/*table*/
+table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    min-width: 600px;
+    max-width: 850px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.delete_transaction_button{
+    max-width:50px;
+    border: none;
+    background: none;
+}
+
+.garbage_td{
+    border: none;
 }

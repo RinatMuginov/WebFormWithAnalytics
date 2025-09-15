@@ -1,0 +1,39 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'register_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Finance Manager by RL</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class = "PageDivider">
+    <div class = "MainDivide">
+        <h1>Finance Manager by RL</h1>
+        <h2>Total Balance</h2>
+        <h3>{{total_balance}} RUB</h3>
+        <button>Edit</button>
+    </div>
+    <div class="MenuDivide">
+        <nav class="menu">
+            <div class = "ProfileIcon">
+                <p>{{ user.first_name }} {{ user.last_name }}</p>
+                <form action="{% url 'logout' %}" method="post">
+                    {% csrf_token %}
+                    <button type="subm  it" class="logout-btn">Log out</button>
+                </form>
+            </div>
+            <ul>
+                <li><a href="{% url 'home' %}">Main Page</a></li>
+                <li><a href="{% url 'expenses_and_incomes' %}">Incomes and expenses</a></li>
+                <li><a href="{% url 'graphics' %}">Graphics</a></li>
+            </ul>
+        </nav>
+    </div>
+    </div>
+</body>
+</html>

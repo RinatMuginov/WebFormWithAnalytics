@@ -1,0 +1,113 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{% static 'register_style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Finance Manager by RL</title>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div class = "PageDivider">
+    <div class = "MainDivide">
+        <h1>Finance Manager by RL</h1>
+        <div class = "MiniApps">
+        <div class = "SubBlock">
+                <h2>Add Income</h2>
+                <form action="{% url 'expenses_and_incomes' %}" method="post">
+                {% csrf_token %}
+                <input name="amount" type="number" placeholder="Amount (Rub)" min="0.1" step="0.1" required>
+                <input type="hidden" name="ctype" value="income">
+                <select name="category" required>
+                    <option value="">— Choose category —</option>
+                    {% for category in income_categories %}
+                    <option value="{{ category.id }}">{{ category.categoryName }}</option>
+                    {% endfor %}
+                </select>
+                <input name="comment" type="text" placeholder="Comment">
+                <button type="submit">Add</button>
+                </form>
+        </div>
+        <div class = "SubBlock">
+                <h2>Add Expense</h2>
+                <form action="{% url 'expenses_and_incomes' %}" method="post">
+                {% csrf_token %}
+                <input name="amount" type="number" placeholder="Amount (Rub)" min="0.1" step="0.1" required>
+                <input type="hidden" name="ctype" value="expense">
+                <select name="category" required>
+                    <option value="">— Choose category —</option>
+                    {% for category in expense_categories %}
+                    <option value="{{ category.id }}">{{ category.categoryName }}</option>
+                    {% endfor %}
+                </select>
+                <input name="comment" type="text" placeholder="Comment">
+                <button type="submit">Add</button>
+                </form>
+        </div>
+        </div>
+        <div class="SubBlock">
+    <h2>History table</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Category</th>
+                <th>Amount</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for t in transactions %}
+                <tr>
+                    <td>{{ t.created_at|date:"d.m.Y H:i" }}</td>
+                    <td>
+                        {% if t.transaction_type == 'income' %}
+                            Income
+                        {% else %}
+                            Expense
+                        {% endif %}
+                    </td>
+                    <td>{{ t.category.categoryName }}</td>
+                    <td>{{ t.amount }}</td>
+                    <td>{{ t.comment }}</td>
+                    <td class="garbage_td">
+                        <form action="{% url 'expenses_and_incomes' %}" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="delete_transaction_id" value="{{ t.id }}">
+                            <button type="submit" class="delete_transaction_button">🗑️</button>
+                        </form>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="5">No transactions now</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+    </div>
+    <div class="MenuDivide">
+        <div class = "ProfileIcon">
+            <p>{{ user.first_name }} {{ user.last_name }}</p>
+            <a href="{% url 'profilepage' %}" class="logout-btn">Edit</a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                    <button type="submit" class="logout-btn">Log out</button>
+            </form>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li><a href="{% url 'home' %}">Main Page</a></li>
+                <li><a href="{% url 'expenses_and_incomes' %}">Incomes and expenses</a></li>
+                <li><a href="{% url 'graphics' %}">Graphics</a></li>
+            </ul>
+        </nav>
+    </div>
+    </div>
+</body>
+</html>

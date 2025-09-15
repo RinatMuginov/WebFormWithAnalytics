@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
-class UsersConfig(AppConfig):
+
+class ExpensesAndIncomesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'users'
+    name = 'expenses_and_incomes'

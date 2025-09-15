@@ -11,6 +11,19 @@
 </head>
 
 <body>
-    <h1>ENT3ER</h1>
+    <div class = "PageDivider">
+    <div class = "MainDivide">
+        <h1>Finance Manager by RL</h1>
+    </div>
+    <div class="MenuDivide">
+        <nav class="menu">
+            <ul>
+                <li><a href="{% url 'home' %}">Main Page</a></li>
+                <li><a href="{% url 'expenses_and_incomes' %}">Incomes and expenses</a></li>
+                <li><a href="{% url 'graphics' %}">Graphics</a></li>
+            </ul>
+        </nav>
+    </div>
+    </div>
 </body>
 </html>

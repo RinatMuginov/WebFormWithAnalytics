@@ -3,11 +3,24 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login as auth_login 
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.http import require_http_methods
+
+@sensitive_post_parameters('user_password')
+@csrf_protect
+@never_cache
+@require_http_methods(["GET", "POST"])
 
 def login_view(request):
+    if request.user.is_authenticated:
+            return redirect('home')
+    
     if request.method == "POST":
         action = request.POST.get("action")
-
+        
         if action == 'register':
             return redirect('register')
 
@@ -30,6 +43,9 @@ def login_view(request):
     return render(request, 'login.html')
 
 def register_view(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    
     if request.method == "POST":
         action = request.POST.get("action")
 
@@ -70,6 +86,3 @@ def register_view(request):
 
 
     return render(request, 'register.html')
-
-def home_view(request):
-    return render(request, 'success.html')
